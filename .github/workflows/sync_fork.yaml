@@ -1,0 +1,20 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # every day
+  workflow_dispatch: # on button click
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fork Sync
+        uses: tgymnich/fork-sync@v1.9.0
+        with:
+#          merge_method: rebase
+          retry_after: 10
+          base: master
+          head: prod
+          token: ${{ github.token }}
+
